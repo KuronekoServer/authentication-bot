@@ -7,6 +7,98 @@ const ser = new Keyv('sqlite://db.sqlite', { table: 'certification' })
 //DBのテーブル作成
 const deltime = 10;
 //メッセージを消す時間(秒)
+client.on('ready', async () => {
+    //This will get the amount of servers and then return it.
+    const servers = await client.guilds.cache.size
+    const users = await client.users.cache.size
+    
+    console.log(`Botは今 ${servers} 個のサーバーに入ってるよー`)
+
+    client.user.setActivity(`!help | 導入数 ${servers} `, {
+        type: 'PLAYING',
+    })
+})
+
+.on("message", async message => {
+
+    if (message.content == "!sporrt") {
+        const embed = {
+            embed: {
+                title: "サポートサーバーです",
+                description: "SupportServer",
+                color: 0xffff00,
+                fields: [{
+                    name: "URL",
+                    value: "https://discord.gg/Y6w5Jv3EAR",
+                    inline: false,
+                }],
+            },
+        };
+        message.channel.send(embed);
+    }
+
+
+
+
+    if (message.content == "!help") {
+        const embed = {
+            "embed": {
+                "title": "helpです",
+                "description": "This is Help commands",
+                "color": 0xffff12,
+                "fields": [
+                    {
+                        "name": "!help",
+                        "value": "今、表示しているやつです",
+                        "inline": false
+                    },
+                    {
+                        "name": "!ping",
+                        "value": "ping値を出します",
+                        " inline": false
+                    },
+                    {
+                        "name": "!sporrt",
+                        "value": "サポサバのURLを表示します",
+                        "inline": false
+                    },
+                    {
+                        "name": "!登録 [IDまたはメンション]",
+                        "value": "認証ロールを登録します。",
+                        "inline": false
+
+                    },
+                    {
+                        "name": "!削除",
+                        "value": "登録情報を削除します。",
+                        "inline": false
+                    },
+                    {
+                        "name": "!確認",
+                        "value": "設定の確認ができます。",
+                        "inline": false
+                    },
+                    {
+                        "name": "!認証",
+                        "value": "認証コードが発行されます。",
+                        "inline": false
+                    }]
+            }
+        }
+        message.channel.send(embed);
+    }
+
+
+
+    if (message.content == "!ping") {
+        message.channel.send(` Ping を確認しています...`).then((pingcheck) => {
+            pingcheck.edit(
+                `botの速度|${pingcheck.createdTimestamp - message.createdTimestamp} ms`
+            )
+        })
+    }
+})
+
 client.on('messageCreate', async message => {
     //messageイベント発火
       if (!message.channel.type == "text" || message.author.bot) return;
@@ -19,7 +111,7 @@ client.on('messageCreate', async message => {
             //メッセージのコマンドを抜いた部分を配列にしてargsに代入
           const role = message.mentions.roles.first();
           //メンションされた情報をroleに代入
-          if (!args[0]) return message.channel.send("引用がないよ");
+          if (!args[0]) return message.channel.send("引用がないです");
           //もしコマンドだけなら
           if (role) {
               //メンションされた場合の処理
@@ -170,4 +262,4 @@ client.on('messageCreate', async message => {
           main.delete()
       }
   })
-client.login("YOUTOKEN!!")
+client.login("BotTOKEN")
