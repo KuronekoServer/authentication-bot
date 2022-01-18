@@ -193,7 +193,7 @@ client.on('message', async message => {
         const {
             registerFont
         } = require('canvas');
-        registerFont('1.ttc', {
+        registerFont('./1.ttc', {
             family: 'Yusei Magic'
         });
         const applyText = (canvas, text) => {
